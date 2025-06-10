@@ -20,6 +20,7 @@ def home():
             <p>
                 Generate your digital menu in just 5 mins!
             </p>
+            <a href="mailto:hellochaitanyavaddi@gmail.com">The work is inprogess</a>
         </body>
 
         </html>
