@@ -7,4 +7,7 @@ class RestaurantService():
 
     
     def create_restaurant(self, restuarant_details):
-        self._repository.create_restaurant(restuarant_details)
+        return self._repository.create_restaurant(restuarant_details)
+    
+    def get_restaurants(self):
+        return self._repository.get_all()
