@@ -155,13 +155,13 @@
     <div class="container">
       <div class="heading_container">
         <h2 style="color: white">
-          Login
+          Signup
         </h2>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="/api/login" method="POST">
+            <form action="/api/signup" method="POST">
               
               <div>
                 <input name="email" type="email" class="form-control" placeholder="Your Email" />
@@ -172,8 +172,12 @@
               </div>
               <div class="btn_box">
                 <button>
-                  Login
+                  Signup
                 </button>
+              </div>
+              <div>
+
+                <p style="color: white;"> {{ message }}</p>
               </div>
             </form>
           </div>

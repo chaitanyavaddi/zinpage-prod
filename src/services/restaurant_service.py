@@ -5,7 +5,9 @@ class RestaurantService():
     def __init__(self):
         self._repository = RestaurantRepository()
 
-    
+    def signup_restaurant(self, email, password):
+        return self._repository.signup_restaurant(email, password)
+
     def create_restaurant(self, restuarant_details):
         return self._repository.create_restaurant(restuarant_details)
     
