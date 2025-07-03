@@ -64,6 +64,14 @@ def get_dashboard_page(request: Request):
         status_code=status.HTTP_303_SEE_OTHER
     )
 
+@router.get('/settings')
+def get_restaurant_settings(request: Request):
+    user = get_loggedin_user(request)
+    if user:
+        res = RestaurantService()
+        settings = res.get_restaurant(user.user.id)
+        return templates.TemplateResponse('settings.html', {"request": request, "user": user.user, "settings": settings[0]})
+
 
 ## APIS
 
@@ -89,6 +97,28 @@ def make_signup(request: Request,
     return templates.TemplateResponse("signup.html", {"request": request, "message": "Signup successful"})
    except Exception as e:
       return templates.TemplateResponse("signup.html", {"request": request, "message": e.hint})
+
+@router.post("/api/settings/save")
+def save_settings(request: Request,  
+               name: str = Form(...), 
+               phone: str = Form(...),  
+               username: str = Form(...), 
+               bio: str = Form(...)):
+    user = get_loggedin_user(request)
+    if user:
+        details = {
+            "name": name.strip(),
+            "phone": phone,
+            "username": username,
+            "user_id": user.user.id
+        }
+        res_service =  RestaurantService()
+        settings = res_service.update_restaurant(details)
+        if settings:
+            return  RedirectResponse("/settings")
+         
+
+
 
 @router.post('/api/login')
 def make_login(request: Request, 

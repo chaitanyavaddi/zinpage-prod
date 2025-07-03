@@ -30,6 +30,14 @@ class RestaurantRepository:
         result = self.supabase.table(self._table_name).insert(restaurant).execute()
         return result.data
     
+    def get_restaurant(self, user_id):
+        result = self.supabase.table(self._table_name).select('*').eq('user_id', user_id).execute()
+        return result.data
+    
+    def update_restaurant(self, restaurant):
+        result = self.supabase.table(self._table_name).update(restaurant).eq('user_id', restaurant.get('user_id')).execute()
+        return result.data
+    
     def get_all(self):
         result = self.supabase.table(self._table_name).select("id,name,email,username,phone").execute()
         # self.supabase.storage()
