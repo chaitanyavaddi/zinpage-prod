@@ -23,6 +23,9 @@ class RestaurantService():
     def get_restaurants(self):
         return self._repository.get_all()
     
+    def get_dishes(self, res_id):
+        return self._repository.get_dishes(res_id)
+    
 
     def get_current_user(self, session_token):
         return self._repository.get_current_user(session_token)

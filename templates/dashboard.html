@@ -280,10 +280,15 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="logo">Feare</div>
+        <a href="/dashboard">
+            <div class="logo">
+                    Zinpage
+        </div>
+        </a>
+        
         <div class="user-info">
             <span>Welcome, Restaurant Owner</span>
-             <button class="btn">Settings</button>
+             <button class="btn"><a href="/settings" style="text-decoration: none; color: #000;">Settings</a></button>
             <button class="btn"><a href="/api/logout" style="text-decoration: none; color: #000;">Logout</a></button>
         </div>
     </div>
@@ -315,35 +320,21 @@
         <!-- Dishes Grid -->
         <div class="dishes-grid" id="dishesGrid">
             <!-- Sample dishes - replace with dynamic content -->
-            <div class="dish-card">
-                <div class="dish-name">Classic Cheeseburger</div>
-                <div class="dish-price">$12.99</div>
-                <div class="dish-description">Juicy beef patty with melted cheese, lettuce, tomato, and our signature sauce on a toasted bun.</div>
+            
+
+            {% for item in dishes %}
+                <div class="dish-card">
+                <div class="dish-name">{{ item['name'] }}</div>
+                <div class="dish-price">Rs.{{ item['price'] }}</div>
+                <div class="dish-description">{{ item['description'] }}</div>
                 <div class="dish-actions">
                     <button class="btn btn-edit" onclick="editDish(1)">Edit</button>
                     <button class="btn btn-danger" onclick="deleteDish(1)">Delete</button>
                 </div>
             </div>
+            {% endfor %}
 
-            <div class="dish-card">
-                <div class="dish-name">Crispy Chicken Wings</div>
-                <div class="dish-price">$9.99</div>
-                <div class="dish-description">Golden crispy wings tossed in your choice of buffalo, BBQ, or honey garlic sauce.</div>
-                <div class="dish-actions">
-                    <button class="btn btn-edit" onclick="editDish(2)">Edit</button>
-                    <button class="btn btn-danger" onclick="deleteDish(2)">Delete</button>
-                </div>
-            </div>
-
-            <div class="dish-card">
-                <div class="dish-name">Loaded Fries</div>
-                <div class="dish-price">$7.99</div>
-                <div class="dish-description">Crispy fries topped with melted cheese, bacon bits, green onions, and sour cream.</div>
-                <div class="dish-actions">
-                    <button class="btn btn-edit" onclick="editDish(3)">Edit</button>
-                    <button class="btn btn-danger" onclick="deleteDish(3)">Delete</button>
-                </div>
-            </div>
+            
         </div>
     </div>
 

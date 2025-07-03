@@ -57,7 +57,10 @@ def get_signup_page(request: Request):
 def get_dashboard_page(request: Request):
     user = get_loggedin_user(request)
     if user:
-        return templates.TemplateResponse('dashboard.html', {"request": request})
+        res_service =  RestaurantService()
+        res = res_service.get_restaurant(user.user.id)
+        dishes = res_service.get_dishes(res[0]['id'])
+        return templates.TemplateResponse('dashboard.html', {"request": request, "dishes": dishes})
     else:
         return RedirectResponse(
         url="/login",
@@ -70,8 +73,11 @@ def get_restaurant_settings(request: Request):
     if user:
         res = RestaurantService()
         settings = res.get_restaurant(user.user.id)
-        return templates.TemplateResponse('settings.html', {"request": request, "user": user.user, "settings": settings[0]})
-
+        if settings:
+            settings = settings[0]
+        return templates.TemplateResponse('settings.html', {"request": request, "user": user.user, "settings": settings})
+    else:
+        return RedirectResponse('/login')
 
 ## APIS
 
@@ -115,7 +121,7 @@ def save_settings(request: Request,
         res_service =  RestaurantService()
         settings = res_service.update_restaurant(details)
         if settings:
-            return  RedirectResponse("/settings")
+            return RedirectResponse("/settings", status_code=status.HTTP_303_SEE_OTHER)
          
 
 

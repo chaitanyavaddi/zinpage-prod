@@ -43,6 +43,10 @@ class RestaurantRepository:
         # self.supabase.storage()
         return result.data
     
+    def get_dishes(self, res_id):
+        result = self.supabase.table('dishes').select('*').eq('restaurant_id', res_id).execute()
+        return result.data
+    
     def get_current_user(self, session_token):
         try:
             user = self.supabase.auth.get_user(session_token)
